@@ -146,19 +146,19 @@ namespace UnboundLib
                 orig(self);
             };
 
-            IEnumerator ArmsRaceStartCoroutine(On.GM_ArmsRace.orig_Start orig, GM_ArmsRace self)
+            IEnumerator ArmsRaceStartCoroutine(On.GM_ArmsRace.orig_Awake orig, GM_ArmsRace self)
             {
                 yield return GameModeManager.TriggerHook(GameModeHooks.HookInitStart);
                 orig(self);
                 yield return GameModeManager.TriggerHook(GameModeHooks.HookInitEnd);
             }
 
-            On.GM_ArmsRace.Start += (orig, self) =>
+            On.GM_ArmsRace.Awake += (orig, self) =>
             {
                 self.StartCoroutine(ArmsRaceStartCoroutine(orig, self));
             };
 
-            IEnumerator SandboxStartCoroutine(On.GM_Test.orig_Start orig, GM_Test self)
+            IEnumerator SandboxStartCoroutine(On.GM_Test.orig_Awake orig, GM_Test self)
             {
                 yield return GameModeManager.TriggerHook(GameModeHooks.HookInitStart);
                 yield return GameModeManager.TriggerHook(GameModeHooks.HookInitEnd);
@@ -168,7 +168,7 @@ namespace UnboundLib
                 yield return GameModeManager.TriggerHook(GameModeHooks.HookBattleStart);
             }
 
-            On.GM_Test.Start += (orig, self) =>
+            On.GM_Test.Awake += (orig, self) =>
             {
                 self.StartCoroutine(SandboxStartCoroutine(orig, self));
             };
